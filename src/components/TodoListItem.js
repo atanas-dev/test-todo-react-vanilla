@@ -16,29 +16,49 @@ class TodoListItem extends Component {
     };
   }
 
-  handleOnStatusChange = e => {
+  handleOnStatusUpdate = e => {
     e.stopPropagation();
 
-    this.props.onStatusChange(e.target.checked);
+    this.props.onStatusUpdate(e.target.checked);
+  };
+
+  handleOnTitleUpdate = e => {
+    e.stopPropagation();
+
+    this.props.onTitleUpdate(e.target.value);
+  };
+
+  handleOnEdit = e => {
+    this.setState({
+      editing: true,
+    });
   };
 
   handleOnEditBlur = e => {
-
+    this.stopEditing();
   };
 
   handleOnEditKeyPress = e => {
-
+    if (e.key === 'Enter') {
+      this.stopEditing();
+    }
   };
+
+  stopEditing() {
+    this.setState({
+      editing: false,
+    });
+  }
 
   render() {
     return (
       <li className={`p-3 todo-list__item ${this.props.todo.completed ? 'todo-list__item--completed' : ''}`}>
         <div className="form-check">
           <label className="form-check-label todo-list__item-label">
-            <input type="checkbox" checked={this.props.todo.completed} onChange={this.handleOnStatusChange} className="form-check-input mr-3 todo-list__item-check" />
+            <input type="checkbox" checked={this.props.todo.completed} onChange={this.handleOnStatusUpdate} className="form-check-input mr-3 todo-list__item-check" />
             {
               this.state.editing
-              ? <input type="text" value={this.props.todo.title} onChange={this.handleOnTitleChange} onBlur={this.handleOnEditBlur} onKeyPress={this.handleOnEditKeyPress} />
+              ? <input type="text" value={this.props.todo.title} onChange={this.handleOnTitleUpdate} onBlur={this.handleOnEditBlur} onKeyPress={this.handleOnEditKeyPress} className="todo-list__title-input" autoFocus />
               : this.props.todo.title
             }
           </label>
@@ -62,7 +82,8 @@ TodoListItem.propTypes = {
     title: PropTypes.string,
     completed: PropTypes.bool,
   }).isRequired,
-  onStatusChange: PropTypes.func.isRequired,
+  onStatusUpdate: PropTypes.func.isRequired,
+  onTitleUpdate: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 

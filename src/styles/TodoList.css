@@ -6,3 +6,5 @@
 .todo-list__item-label { margin: 0; }
 
 .todo-list__item-check {  }
+
+.todo-list__title-input { padding: 0; border: 0; background: none; }

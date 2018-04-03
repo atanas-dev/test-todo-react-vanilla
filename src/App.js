@@ -67,6 +67,18 @@ class App extends Component {
     });
   };
 
+  handleOnTitleUpdate = (todoId, title) => {
+    this.setState({
+      todos: map(
+        when(
+          propEq('id', todoId),
+          assoc('title', title)
+        ),
+        this.state.todos
+      ),
+    });
+  };
+
   handleOnDelete = todoId => {
     this.setState({
       todos: reject(
@@ -102,6 +114,7 @@ class App extends Component {
           <TodoList
             todos={this.getFilteredTodos()}
             onStatusUpdate={this.handleOnStatusUpdate}
+            onTitleUpdate={this.handleOnTitleUpdate}
             onDelete={this.handleOnDelete}
           />
         </div>

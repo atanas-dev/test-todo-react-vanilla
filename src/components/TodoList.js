@@ -18,7 +18,8 @@ class TodoList extends Component {
           <TodoListItem
             key={todoItem.id}
             todo={todoItem}
-            onStatusChange={this.props.onStatusUpdate.bind(null, todoItem.id)}
+            onStatusUpdate={this.props.onStatusUpdate.bind(null, todoItem.id)}
+            onTitleUpdate={this.props.onTitleUpdate.bind(null, todoItem.id)}
             onDelete={this.props.onDelete.bind(null, todoItem.id)}
           />
         , this.props.todos)}
@@ -34,6 +35,7 @@ TodoList.propTypes = {
     completed: PropTypes.bool,
   })).isRequired,
   onStatusUpdate: PropTypes.func.isRequired,
+  onTitleUpdate: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired,
 };
 
