@@ -1,0 +1,8 @@
+.todo-list { margin: 0; padding: 0; list-style-type: none; }
+
+.todo-list__item { border-left: 4px solid #FFFFFF; border-bottom: 1px dashed #CCCCCC; }
+.todo-list__item--completed { border-left-color: green; }
+
+.todo-list__item-label { margin: 0; }
+
+.todo-list__item-check {  }
