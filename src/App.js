@@ -9,38 +9,35 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 /**
  * The internal dependencies.
  */
-import TodoHeader from './components/TodoHeader';
-import TodoForm from './components/TodoForm';
-import TodoList from './components/TodoList';
-import './App.css';
+import { store, CHANGE_EVENT } from 'store/todos';
+import { setCurrentFilter } from 'store/actions/todos';
+import TodoHeader from 'components/TodoHeader';
+import TodoForm from 'components/TodoForm';
+import TodoList from 'components/TodoList';
+import 'App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      SAI: 0, // simple auto increment
       todos: [],
-      filters: [
-        {
-          value: 'all',
-          label: 'All',
-        },
-        {
-          value: 'pending',
-          label: 'Pending',
-        },
-        {
-          value: 'completed',
-          label: 'Completed',
-        },
-      ],
-      filter: 'all',
+      filters: store.getFilters(),
+      currentFilter: store.getCurrentFilter(),
     };
   }
 
-  handleOnFilterUpdate = filter => {
+  componentDidMount() {
+    store.on(CHANGE_EVENT, this.onChange);
+  }
+
+  componentWillUnmount() {
+    store.off(CHANGE_EVENT, this.onChage);
+  }
+
+  onChange = () => {
     this.setState({
-      filter,
+      todos: store.getTodos(),
+      currentFilter: store.getCurrentFilter(),
     });
   };
 
@@ -89,11 +86,11 @@ class App extends Component {
   };
 
   getFilteredTodos() {
-    if (this.state.filter === 'pending') {
+    if (this.state.currentFilter === 'pending') {
       return filter(todo => !todo.completed, this.state.todos);
     }
 
-    if (this.state.filter === 'completed') {
+    if (this.state.currentFilter === 'completed') {
       return filter(todo => todo.completed, this.state.todos);
     }
 
@@ -106,8 +103,8 @@ class App extends Component {
         <TodoHeader
           todos={this.state.todos}
           filters={this.state.filters}
-          filter={this.state.filter}
-          onFilterUpdate={this.handleOnFilterUpdate}
+          currentFilter={this.state.currentFilter}
+          onFilterUpdate={setCurrentFilter}
         />
         <div className="app-content">
           <TodoForm onCreate={this.handleOnCreate} />
