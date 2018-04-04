@@ -1,15 +1,15 @@
 /**
  * The external dependencies.
  */
-import { EventEmitter } from 'events';
-import { mergeDeepRight } from 'ramda';
+import {EventEmitter} from 'events';
+import {append, assoc, map, mergeDeepRight, propEq, reject, when} from 'ramda';
 
 /**
  * The internal dependencies.
  */
 import dispatcher from './index';
-import {createActionHandler} from "../utils/actions";
-import {setCurrentFilter} from "./actions/todos";
+import {createActionHandler} from 'utils/actions';
+import {setCurrentFilter, addTodo, setTodoStatus, setTodoTitle, deleteTodo} from 'store/actions/todos';
 
 /**
  * Event constants.
@@ -72,6 +72,51 @@ export const store = mergeDeepRight(EventEmitter.prototype, {
 const handler = createActionHandler({
   [setCurrentFilter]: currentFilter => {
     data.currentFilter = currentFilter;
+
+    store.emitChange();
+  },
+
+  [addTodo]: title => {
+    data.todos = append({
+      id: data.SAI,
+      title,
+      completed: false,
+    }, data.todos);
+    data.SAI = data.SAI + 1;
+
+    store.emitChange();
+  },
+
+  [setTodoStatus]: (id, completed) => {
+    data.todos = map(
+      when(
+        propEq('id', id),
+        assoc('completed', completed)
+      ),
+      data.todos
+    );
+
+    store.emitChange();
+  },
+
+  [setTodoTitle]: (id, title) => {
+    data.todos = map(
+      when(
+        propEq('id', id),
+        assoc('title', title)
+      ),
+      data.todos
+    );
+
+    store.emitChange();
+  },
+
+  [deleteTodo]: id => {
+    data.todos = reject(
+      propEq('id', id),
+      data.todos
+    );
+
     store.emitChange();
   },
 });
