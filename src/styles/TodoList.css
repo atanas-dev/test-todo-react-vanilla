@@ -1,10 +1,45 @@
-.todo-list { margin: 0; padding: 0; list-style-type: none; }
+.todo-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
 
-.todo-list__item { border-left: 4px solid #FFFFFF; border-bottom: 1px dashed #CCCCCC; }
-.todo-list__item--completed { border-left-color: green; }
+.todo-list__item {
+    display: flex;
+    border-left: 4px solid #CCCCCC;
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+}
 
-.todo-list__item-label { margin: 0; }
+.todo-list__item + .todo-list__item {
+    border-top: 0;
+}
 
-.todo-list__item-check {  }
+.todo-list__item--completed {
+    border-left-color: #28a745;
+}
 
-.todo-list__title-input { padding: 0; border: 0; background: none; }
+.todo-list__item-label {
+    line-height: 32px;
+    margin: 0;
+    width: calc(100% - 5px);
+}
+
+.todo-list__item-check {
+    margin-top: 8px;
+}
+
+.todo-list__title-input {
+    padding: 0;
+    border: 0;
+    width: 100%;
+    background: none;
+}
+
+.todo-list__item-details {
+    flex: 1 0 auto;
+}
+
+.todo-list__item-actions {
+    flex: 0 0 auto;
+}

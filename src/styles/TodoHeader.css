@@ -1,0 +1,19 @@
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-header h1 {
+    margin: 0;
+    padding: 0;
+}
+
+.app-header .btn-group .btn {
+    box-shadow: none !important;
+}
+
+.app-header__count {
+    text-align: right;
+    min-width: 50px;
+}

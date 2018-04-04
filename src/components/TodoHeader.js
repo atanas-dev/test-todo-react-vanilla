@@ -22,18 +22,16 @@ class TodoHeader extends Component {
 
   render() {
     return (
-      <header className="app-header">
+      <header className="app-header mb-3">
         <h1 className="app-title">
           Todo
-          <span className="float-right text-muted"><small>{this.getCompletion()}</small></span>
         </h1>
-        <div className="text-center mb-2">
-          <div className="btn-group">
-            {map(filter =>
-              <button key={filter.value} type="button" onClick={this.props.onFilterUpdate.bind(null, filter.value)} className={`btn btn-secondary ${this.props.filter === filter.value ? 'active' : ''}`}>{filter.label}</button>
-            , this.props.filters)}
-          </div>
+        <div className="btn-group">
+          {map(filter =>
+            <button key={filter.value} type="button" onClick={this.props.onFilterUpdate.bind(null, filter.value)} className={`btn btn-secondary ${this.props.filter === filter.value ? 'active' : ''}`}>{filter.label}</button>
+          , this.props.filters)}
         </div>
+        <div className="text-muted app-header__count">{this.getCompletion()}</div>
       </header>
     );
   }
