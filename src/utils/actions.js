@@ -1,7 +1,12 @@
-import dispatcher from 'store/dispatcher';
-
-export const createAction = actionType => {
-  const creator = (...payload) => {
+/**
+ * Create an action function.
+ *
+ * @param {object} dispatcher
+ * @param {string} actionType
+ * @returns {func}
+ */
+export const createAction = (dispatcher, actionType) => {
+  const creator = payload => {
     dispatcher.dispatch({
       actionType,
       payload,
@@ -13,14 +18,18 @@ export const createAction = actionType => {
   return creator;
 };
 
+/**
+ * Create an action handler suitable for a flux store callback.
+ *
+ * @param {object} actionMap
+ * @returns {func}
+ */
 export const createActionHandler = actionMap => {
-  const handler = action => {
+  return action => {
     if (typeof actionMap[action] === undefined) {
       return;
     }
 
-    actionMap[action.actionType](...action.payload);
+    actionMap[action.actionType](action.payload);
   };
-
-  return handler;
 };

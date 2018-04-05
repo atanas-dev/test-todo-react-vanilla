@@ -59,6 +59,16 @@ class App extends Component {
     return this.state.todos;
   }
 
+  handleOnFilterUpdate = currentFilter => setCurrentFilter({ currentFilter });
+
+  handleOnCreate = title => addTodo({ title });
+
+  handleOnStatusUpdate = (id, completed) => setTodoStatus({ id, completed });
+
+  handleOnTitleUpdate = (id, title) => setTodoTitle({ id, title });
+
+  handleOnDelete = id => deleteTodo({ id });
+
   render() {
     return (
       <div className="app container my-3">
@@ -66,15 +76,15 @@ class App extends Component {
           todos={this.state.todos}
           filters={this.state.filters}
           currentFilter={this.state.currentFilter}
-          onFilterUpdate={setCurrentFilter}
+          onFilterUpdate={this.handleOnFilterUpdate}
         />
         <div className="app-content">
-          <TodoForm onCreate={addTodo}/>
+          <TodoForm onCreate={this.handleOnCreate}/>
           <TodoList
             todos={this.getFilteredTodos()}
-            onStatusUpdate={setTodoStatus}
-            onTitleUpdate={setTodoTitle}
-            onDelete={deleteTodo}
+            onStatusUpdate={this.handleOnStatusUpdate}
+            onTitleUpdate={this.handleOnTitleUpdate}
+            onDelete={this.handleOnDelete}
           />
         </div>
       </div>

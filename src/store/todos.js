@@ -76,13 +76,13 @@ export const store = mergeDeepRight(EventEmitter.prototype, {
  * Action handler.
  */
 const handler = createActionHandler({
-  [setCurrentFilter]: currentFilter => {
+  [setCurrentFilter]: ({ currentFilter }) => {
     data.currentFilter = currentFilter;
 
     store.emitChange();
   },
 
-  [addTodo]: title => {
+  [addTodo]: ({ title }) => {
     data.todos = append({
       id: data.SAI,
       title,
@@ -93,7 +93,7 @@ const handler = createActionHandler({
     store.emitChange();
   },
 
-  [setTodoStatus]: (id, completed) => {
+  [setTodoStatus]: ({ id, completed }) => {
     data.todos = map(
       when(
         propEq('id', id),
@@ -105,7 +105,7 @@ const handler = createActionHandler({
     store.emitChange();
   },
 
-  [setTodoTitle]: (id, title) => {
+  [setTodoTitle]: ({ id, title }) => {
     data.todos = map(
       when(
         propEq('id', id),
@@ -117,7 +117,7 @@ const handler = createActionHandler({
     store.emitChange();
   },
 
-  [deleteTodo]: id => {
+  [deleteTodo]: ({ id }) => {
     data.todos = reject(
       propEq('id', id),
       data.todos

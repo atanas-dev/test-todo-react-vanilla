@@ -1,4 +1,7 @@
 import { createAction } from 'utils/actions';
+import dispatcher from 'store/dispatcher';
+
+const createBoundAction = createAction.bind(null, dispatcher);
 
 /**
  * Set the current filter.
@@ -6,7 +9,7 @@ import { createAction } from 'utils/actions';
  * @param {string} currentFilter
  * @returns {void}
  */
-export const setCurrentFilter = createAction('SET_CURRENT_FILTER');
+export const setCurrentFilter = createBoundAction('SET_CURRENT_FILTER');
 
 /**
  * Add a new todo.
@@ -14,7 +17,7 @@ export const setCurrentFilter = createAction('SET_CURRENT_FILTER');
  * @param {string} title
  * @returns {void}
  */
-export const addTodo = createAction('ADD_TODO');
+export const addTodo = createBoundAction('ADD_TODO');
 
 /**
  * Set todo status.
@@ -23,7 +26,7 @@ export const addTodo = createAction('ADD_TODO');
  * @param {bool} completed
  * @returns {void}
  */
-export const setTodoStatus = createAction('SET_TODO_STATUS');
+export const setTodoStatus = createBoundAction('SET_TODO_STATUS');
 
 /**
  * Set todo title.
@@ -32,7 +35,7 @@ export const setTodoStatus = createAction('SET_TODO_STATUS');
  * @param {string} title
  * @returns {void}
  */
-export const setTodoTitle = createAction('SET_TODO_TITLE');
+export const setTodoTitle = createBoundAction('SET_TODO_TITLE');
 
 /**
  * Delete todo.
@@ -40,4 +43,4 @@ export const setTodoTitle = createAction('SET_TODO_TITLE');
  * @param {number} id
  * @returns {void}
  */
-export const deleteTodo = createAction('DELETE_TODO');
+export const deleteTodo = createBoundAction('DELETE_TODO');
