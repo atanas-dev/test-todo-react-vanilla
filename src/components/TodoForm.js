@@ -41,7 +41,14 @@ class TodoForm extends Component {
     return (
       <form onSubmit={this.handleOnSubmit}>
         <div className="form-group">
-          <input type="text" className="form-control" value={this.state.title} onChange={this.handleOnChange} placeholder="What's next?" autoFocus />
+          <input
+            type="text"
+            className="form-control"
+            value={this.state.title}
+            onChange={this.handleOnChange}
+            placeholder="What's next?"
+            autoFocus
+          />
         </div>
       </form>
     );

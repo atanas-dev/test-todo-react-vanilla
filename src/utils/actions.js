@@ -1,4 +1,4 @@
-import dispatcher from 'store/index';
+import dispatcher from 'store/dispatcher';
 
 export const createAction = actionType => {
   const creator = (...payload) => {

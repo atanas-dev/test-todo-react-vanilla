@@ -1,15 +1,21 @@
 /**
  * The external dependencies.
  */
-import {EventEmitter} from 'events';
-import {append, assoc, map, mergeDeepRight, propEq, reject, when} from 'ramda';
+import { EventEmitter } from 'events';
+import { append, assoc, map, mergeDeepRight, propEq, reject, when } from 'ramda';
 
 /**
  * The internal dependencies.
  */
-import dispatcher from './index';
-import {createActionHandler} from 'utils/actions';
-import {setCurrentFilter, addTodo, setTodoStatus, setTodoTitle, deleteTodo} from 'store/actions/todos';
+import dispatcher from 'store/dispatcher';
+import { createActionHandler } from 'utils/actions';
+import {
+  setCurrentFilter,
+  addTodo,
+  setTodoStatus,
+  setTodoTitle,
+  deleteTodo
+} from 'store/actions/todos';
 
 /**
  * Event constants.

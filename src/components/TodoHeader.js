@@ -28,8 +28,15 @@ class TodoHeader extends Component {
         </h1>
         <div className="btn-group">
           {map(filter =>
-            <button key={filter.value} type="button" onClick={this.props.onFilterUpdate.bind(null, filter.value)} className={`btn btn-secondary ${this.props.currentFilter === filter.value ? 'active' : ''}`}>{filter.label}</button>
-          , this.props.filters)}
+              <button
+                key={filter.value}
+                type="button"
+                onClick={this.props.onFilterUpdate.bind(null, filter.value)}
+                className={`btn btn-secondary ${this.props.currentFilter === filter.value ? 'active' : ''}`}
+              >
+                {filter.label}
+              </button>
+            , this.props.filters)}
         </div>
         <div className="text-muted app-header__count">{this.getCompletion()}</div>
       </header>

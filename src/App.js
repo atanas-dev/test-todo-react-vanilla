@@ -1,16 +1,22 @@
 /**
  * The external dependencies.
  */
-import React, {Component} from 'react';
-import {filter} from 'ramda';
+import React, { Component } from 'react';
+import { filter } from 'ramda';
 import 'font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 /**
  * The internal dependencies.
  */
-import {store, CHANGE_EVENT} from 'store/todos';
-import {setCurrentFilter, addTodo, setTodoStatus, setTodoTitle, deleteTodo} from 'store/actions/todos';
+import { store, CHANGE_EVENT } from 'store/todos';
+import {
+  setCurrentFilter,
+  addTodo,
+  setTodoStatus,
+  setTodoTitle,
+  deleteTodo
+} from 'store/actions/todos';
 import TodoHeader from 'components/TodoHeader';
 import TodoForm from 'components/TodoForm';
 import TodoList from 'components/TodoList';
@@ -63,7 +69,7 @@ class App extends Component {
           onFilterUpdate={setCurrentFilter}
         />
         <div className="app-content">
-          <TodoForm onCreate={addTodo} />
+          <TodoForm onCreate={addTodo}/>
           <TodoList
             todos={this.getFilteredTodos()}
             onStatusUpdate={setTodoStatus}
