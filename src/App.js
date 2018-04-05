@@ -22,6 +22,9 @@ import TodoForm from 'components/TodoForm';
 import TodoList from 'components/TodoList';
 import 'App.css';
 
+/**
+ * Main app component.
+ */
 class App extends Component {
   constructor(props) {
     super(props);
@@ -59,16 +62,6 @@ class App extends Component {
     return this.state.todos;
   }
 
-  handleOnFilterUpdate = currentFilter => setCurrentFilter({ currentFilter });
-
-  handleOnCreate = title => addTodo({ title });
-
-  handleOnStatusUpdate = (id, completed) => setTodoStatus({ id, completed });
-
-  handleOnTitleUpdate = (id, title) => setTodoTitle({ id, title });
-
-  handleOnDelete = id => deleteTodo({ id });
-
   render() {
     return (
       <div className="app container my-3">
@@ -76,15 +69,15 @@ class App extends Component {
           todos={this.state.todos}
           filters={this.state.filters}
           currentFilter={this.state.currentFilter}
-          onFilterUpdate={this.handleOnFilterUpdate}
+          onFilterUpdate={setCurrentFilter}
         />
         <div className="app-content">
-          <TodoForm onCreate={this.handleOnCreate}/>
+          <TodoForm onCreate={addTodo}/>
           <TodoList
             todos={this.getFilteredTodos()}
-            onStatusUpdate={this.handleOnStatusUpdate}
-            onTitleUpdate={this.handleOnTitleUpdate}
-            onDelete={this.handleOnDelete}
+            onStatusUpdate={setTodoStatus}
+            onTitleUpdate={setTodoTitle}
+            onDelete={deleteTodo}
           />
         </div>
       </div>
